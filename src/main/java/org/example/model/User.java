@@ -1,13 +1,13 @@
 package org.example.model;
 
 public abstract class User {
-    private long ID;
+    private String ID;
     private String email;
     private String password;
     private String phone;
 
     public User(){};
-    public User(long ID, String email, String password, String phone) {
+    public User(String ID, String email, String password, String phone) {
         this.ID = ID;
         this.email = email;
         this.password = password;
@@ -19,11 +19,13 @@ public abstract class User {
                 "\n Email: "+email+
                 "\n Phone: "+phone);
     }
-    public long getID() {
+
+    public abstract void printRole();
+    public String getID() {
         return ID;
     }
 
-    public void setID(long ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 

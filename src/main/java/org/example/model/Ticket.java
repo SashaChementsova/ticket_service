@@ -2,11 +2,12 @@ package org.example.model;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Objects;
 
 public class Ticket {
     private String ID;
     private String concertHall;
-    private int eventCode;
+    private String eventCode;
     private long time;
     private boolean isPromo;
     private StadiumSector stadiumSector;
@@ -17,7 +18,7 @@ public class Ticket {
     public Ticket() {
 
     }
-    public Ticket(String ID, String concertHall, int eventCode, long time, boolean isPromo, StadiumSector stadiumSector, double allowedBackpack, BigDecimal price) {
+    public Ticket(String ID, String concertHall, String eventCode, long time, boolean isPromo, StadiumSector stadiumSector, double allowedBackpack, BigDecimal price) {
         this.ID = ID;
         this.concertHall = concertHall;
         this.eventCode = eventCode;
@@ -50,6 +51,30 @@ public class Ticket {
         this.stadiumSector = stadiumSector;
     }
 
+    public String getID() {
+        return ID;
+    }
+
+    public String getConcertHall() {
+        return concertHall;
+    }
+
+    public String getEventCode() {
+        return eventCode;
+    }
+
+    public boolean isPromo() {
+        return isPromo;
+    }
+
+    public double getAllowedBackpack() {
+        return allowedBackpack;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
     @Override
     public String toString() {
         String promo = isPromo? "yes" : "no";
@@ -62,5 +87,18 @@ public class Ticket {
                 "\n Stadium sector - " + stadiumSector +
                 "\n Allowed backpack - " + allowedBackpack +" kg"+
                 "\n Price - " + price +" byn";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return time == ticket.time && isPromo == ticket.isPromo && Double.compare(allowedBackpack, ticket.allowedBackpack) == 0 && Objects.equals(ID, ticket.ID) && Objects.equals(concertHall, ticket.concertHall) && Objects.equals(eventCode, ticket.eventCode) && stadiumSector == ticket.stadiumSector && Objects.equals(price, ticket.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, concertHall, eventCode, time, isPromo, stadiumSector, allowedBackpack, price);
     }
 }
